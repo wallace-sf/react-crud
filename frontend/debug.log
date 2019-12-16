@@ -1,0 +1,4 @@
+[1215/160057.966:ERROR:process_info.cc(118)] ReadProcessMemory bool __cdecl crashpad::(anonymous namespace)::ReadStruct(HANDLE, crashpad::WinVMAddress, T *) [T = crashpad::process_types::LDR_DATA_TABLE_ENTRY<crashpad::process_types::internal::Traits64>]: Somente uma parte de um pedido ReadProcessMemory ou WriteProcessMemory foi concluída. (0x12B)
+[1215/160100.515:ERROR:process_info.cc(329)] VirtualQueryEx: Acesso negado. (0x5)
+[1215/160100.515:ERROR:process_info.cc(556)] ReadMemoryInfo failed
+[1215/160100.990:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: Tentou-se acessar um processo de saída. (0xc000010a)

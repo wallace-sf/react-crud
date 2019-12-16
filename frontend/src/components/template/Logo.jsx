@@ -5,5 +5,7 @@ import logo from '../../assets/imgs/logo.png';
 
 export default props =>
     <aside className="logo">
-        <img src={logo} alt="Logo" />
+        <a href="/">
+            <img src={logo} alt="Logo" />
+        </a>
     </aside>

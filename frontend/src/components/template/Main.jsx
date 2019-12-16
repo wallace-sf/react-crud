@@ -1,9 +1,14 @@
 import React, { Fragment } from 'react';
-import Home from '../home/Home';
-import UserCrud from '../user/Crud';
+import Header from '../template/Header';
+
+import './Main.css';
 
 export default props =>
     <Fragment>
-        <Home />
-        <UserCrud />
+        <Header {...props} />
+        <main className="content container-fluid">
+            <div className="mt-3 p-3">
+                {props.children}
+            </div>
+        </main>
     </Fragment>
