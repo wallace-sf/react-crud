@@ -7,23 +7,36 @@ const headerProps = {
     icon: 'users',
     title: 'Usuários',
     subtitle: 'Cadastro de usuário: Incluir, exibir, alterar e deletar.'
-}
+};
 
 const initialState = {
-    user: { nome: '', email: '' },
+    user: { name: '', email: '' },
     list: []
-}
+};
 
 
 export default class UserCrud extends Component {
 
-    state = { ...initialState }
+    constructor(props) {
+        super(props)
+        this.state = { ...initialState };
+    };
 
-    componentWillMount() {
+    componentDidMount() {
         axios(baseUrl)
             .then(res => {
-                this.setState({ list: res.data })
+                this.setState({ list: res.data });
             })
+    };
+
+    load(user) {
+        this.setState({ user });
+    };
+
+    updateField(event) {
+        const user = { ...this.state.user };
+        user[event.target.name] = event.target.value;
+        this.setState({ user });
     }
 
     renderForm() {
@@ -32,10 +45,13 @@ export default class UserCrud extends Component {
                 <div className="row">
                     <div className="col-12 col-md-6">
                         <div className="form-group">
-                            <label htmlFor="nome">Nome</label>
+                            <label htmlFor="name">Nome</label>
                             <input type="text" className="form-control"
-                                name="nome"
-                                id="nome" />
+                                name="name"
+                                id="name"
+                                placeholder="Digite seu nome"
+                                value={this.state.user.name}
+                                onChange={(e) => this.updateField(e)} />
                         </div>
                     </div>
                     <div className="col-12 col-md-6">
@@ -43,7 +59,9 @@ export default class UserCrud extends Component {
                             <label htmlFor="email">E-mail</label>
                             <input type="text" className="form-control"
                                 name="email"
-                                id="email" />
+                                id="email"
+                                placeholder="Digite seu e-mail"
+                                value={this.state.user.email} />
                         </div>
                     </div>
                 </div>
@@ -56,7 +74,7 @@ export default class UserCrud extends Component {
                 </div>
             </div>
         )
-    }
+    };
 
     renderTable() {
         return (
@@ -74,18 +92,19 @@ export default class UserCrud extends Component {
                 </tbody>
             </table>
         )
-    }
+    };
 
     renderRows() {
         return (
             this.state.list.map(user => {
                 return (
-                    <tr key={user.id}>{user.id}
+                    <tr key={user.id}>
                         <td>{user.id}</td>
                         <td>{user.name}</td>
                         <td>{user.email}</td>
                         <td>
-                            <button className="btn btn-warning">
+                            <button className="btn btn-warning"
+                                onClick={() => this.load(user)}>
                                 <i className="fa fa-pencil"></i>
                             </button>
                             <button className="btn btn-danger ml-2">
@@ -96,7 +115,7 @@ export default class UserCrud extends Component {
                 )
             })
         )
-    }
+    };
 
     render() {
         return (
@@ -105,5 +124,5 @@ export default class UserCrud extends Component {
                 {this.renderTable()}
             </Main>
         )
-    }
+    };
 }
