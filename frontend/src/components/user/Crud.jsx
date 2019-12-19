@@ -33,7 +33,12 @@ export default class UserCrud extends Component {
         this.setState({ user });
     };
 
+    clear() {
+        this.setState({ user: initialState.user });
+    }
+
     updateField(event) {
+        console.log(this.state.user)
         const user = { ...this.state.user };
         user[event.target.name] = event.target.value;
         this.setState({ user });
@@ -61,7 +66,8 @@ export default class UserCrud extends Component {
                                 name="email"
                                 id="email"
                                 placeholder="Digite seu e-mail"
-                                value={this.state.user.email} />
+                                value={this.state.user.email}
+                                onChange={(e) => this.updateField(e)} />
                         </div>
                     </div>
                 </div>
@@ -69,7 +75,8 @@ export default class UserCrud extends Component {
                 <div className="row">
                     <div className="col-12 d-flex justify-content-end">
                         <button className="btn btn-primary">Salvar</button>
-                        <button className="btn btn-secondary ml-2">Cancelar</button>
+                        <button className="btn btn-secondary ml-2"
+                            onClick={() => this.clear()}>Cancelar</button>
                     </div>
                 </div>
             </div>
