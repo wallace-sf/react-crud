@@ -1,14 +1,54 @@
 {
-    "users": [
-        {
-            "id": 1,
-            "name": "Arthur Oliveira",
-            "email": "aoliveira@cod3r.com.br"
-        },
-        {
-            "id": 2,
-            "name": "Maria Julia Oliveira",
-            "email": "mjds@empresa.com"
-        }
-    ]
+  "users": [
+    {
+      "id": 1,
+      "name": "Arthur Oliveira",
+      "email": "aoliveira@cod3r.com.br"
+    },
+    {
+      "id": 2,
+      "name": "Maria Julia Oliveira",
+      "email": "mjds@empresa.com"
+    },
+    {
+      "name": "José Amancio",
+      "email": "joseaman@email.com",
+      "id": 5
+    },
+    {
+      "name": "Barack Obama",
+      "email": "barackobama@usa.com",
+      "id": 6
+    },
+    {
+      "name": "Jesus Chris",
+      "email": "sky@jesus.com",
+      "id": 7
+    },
+    {
+      "name": "Fábio Porchat",
+      "email": "fabioporchat@comercial.com",
+      "id": 8
+    },
+    {
+      "name": "Gugu Liberato",
+      "email": "gugu@record.com",
+      "id": 10
+    },
+    {
+      "name": "Clark Kent",
+      "email": "superman@jl.com",
+      "id": 11
+    },
+    {
+      "name": "Dilma Rouseff",
+      "email": "dilmais@dilmao.com",
+      "id": 12
+    },
+    {
+      "name": "Roberto Injustus",
+      "email": "robertoinjustus@record.com",
+      "id": 13
+    }
+  ]
 }

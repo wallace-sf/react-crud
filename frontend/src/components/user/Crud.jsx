@@ -8,12 +8,10 @@ const headerProps = {
     title: 'Usuários',
     subtitle: 'Cadastro de usuário: Incluir, exibir, alterar e deletar.'
 };
-
 const initialState = {
     user: { name: '', email: '' },
     list: []
 };
-
 
 export default class UserCrud extends Component {
 
@@ -26,7 +24,7 @@ export default class UserCrud extends Component {
         axios(baseUrl)
             .then(res => {
                 this.setState({ list: res.data });
-            })
+            });
     };
 
     load(user) {
@@ -37,8 +35,28 @@ export default class UserCrud extends Component {
         this.setState({ user: initialState.user });
     }
 
+    save() {
+        const user = this.state.user;
+        const method = user.id ? 'put' : 'post';
+        const url = user.id ? `${baseUrl}/${user.id}` : `${baseUrl}`;
+
+        axios[method](url, user)
+            .then(res => {
+                const list = this.updateList(res.data);
+                this.setState({ list });
+            });
+
+    }
+
+    updateList(user, add = true) {
+        const list = this.state.list.filter(u => u.id !== user.id);
+
+        if (add) list.unshift(user);
+
+        return list
+    }
+
     updateField(event) {
-        console.log(this.state.user)
         const user = { ...this.state.user };
         user[event.target.name] = event.target.value;
         this.setState({ user });
@@ -74,14 +92,15 @@ export default class UserCrud extends Component {
                 <hr />
                 <div className="row">
                     <div className="col-12 d-flex justify-content-end">
-                        <button className="btn btn-primary">Salvar</button>
+                        <button className="btn btn-primary"
+                            onClick={() => this.save()}>Salvar</button>
                         <button className="btn btn-secondary ml-2"
                             onClick={() => this.clear()}>Cancelar</button>
                     </div>
                 </div>
             </div>
         )
-    };
+    }
 
     renderTable() {
         return (
@@ -99,7 +118,7 @@ export default class UserCrud extends Component {
                 </tbody>
             </table>
         )
-    };
+    }
 
     renderRows() {
         return (
@@ -122,7 +141,7 @@ export default class UserCrud extends Component {
                 )
             })
         )
-    };
+    }
 
     render() {
         return (
@@ -131,5 +150,5 @@ export default class UserCrud extends Component {
                 {this.renderTable()}
             </Main>
         )
-    };
+    }
 }
