@@ -49,6 +49,26 @@
       "name": "Roberto Injustus",
       "email": "robertoinjustus@record.com",
       "id": 13
+    },
+    {
+      "name": "Chalmers Skinner",
+      "email": "charlmers@simpsons.com",
+      "id": 14
+    },
+    {
+      "name": "Save the World",
+      "email": "savetheworld@onu.world",
+      "id": 15
+    },
+    {
+      "name": "Seu Jorge",
+      "email": "seujorge@globo.com",
+      "id": 16
+    },
+    {
+      "name": "Mano Brown",
+      "email": "mb@racionaismc.com",
+      "id": 17
     }
   ]
 }

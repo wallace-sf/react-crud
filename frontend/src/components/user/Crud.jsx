@@ -43,7 +43,7 @@ export default class UserCrud extends Component {
         axios[method](url, user)
             .then(res => {
                 const list = this.updateList(res.data);
-                this.setState({ list });
+                this.setState({ list }, this.clear());
             });
 
     }
