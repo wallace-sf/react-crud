@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Main from '../template/Main';
 
+import './Crud.css';
+
 const baseUrl = 'http://localhost:3001/users';
 const headerProps = {
     icon: 'users',
@@ -18,18 +20,18 @@ export default class UserCrud extends Component {
     constructor(props) {
         super(props)
         this.state = { ...initialState };
-    };
+    }
 
     componentDidMount() {
         axios(baseUrl)
             .then(res => {
                 this.setState({ list: res.data });
             });
-    };
+    }
 
     load(user) {
         this.setState({ user });
-    };
+    }
 
     clear() {
         this.setState({ user: initialState.user });
@@ -42,13 +44,23 @@ export default class UserCrud extends Component {
 
         axios[method](url, user)
             .then(res => {
-                const list = this.updateList(res.data);
+                const list = this.getUpdateList(res.data);
                 this.setState({ list }, this.clear());
             });
 
     }
 
-    updateList(user, add = true) {
+    remove(user) {
+        const url = `${baseUrl}/${user.id}`;
+        axios.delete(url)
+            .then(res => {
+                const list = this.getUpdateList(user, false);
+                console.log(list)
+                this.setState({ list });
+            });
+    }
+
+    getUpdateList(user, add = true) {
         const list = this.state.list.filter(u => u.id !== user.id);
 
         if (add) list.unshift(user);
@@ -56,7 +68,7 @@ export default class UserCrud extends Component {
         return list
     }
 
-    updateField(event) {
+    getUpdateField(event) {
         const user = { ...this.state.user };
         user[event.target.name] = event.target.value;
         this.setState({ user });
@@ -74,7 +86,7 @@ export default class UserCrud extends Component {
                                 id="name"
                                 placeholder="Digite seu nome"
                                 value={this.state.user.name}
-                                onChange={(e) => this.updateField(e)} />
+                                onChange={(e) => this.getUpdateField(e)} />
                         </div>
                     </div>
                     <div className="col-12 col-md-6">
@@ -85,7 +97,7 @@ export default class UserCrud extends Component {
                                 id="email"
                                 placeholder="Digite seu e-mail"
                                 value={this.state.user.email}
-                                onChange={(e) => this.updateField(e)} />
+                                onChange={(e) => this.getUpdateField(e)} />
                         </div>
                     </div>
                 </div>
@@ -126,14 +138,15 @@ export default class UserCrud extends Component {
                 return (
                     <tr key={user.id}>
                         <td>{user.id}</td>
-                        <td>{user.name}</td>
-                        <td>{user.email}</td>
+                        <td className="ellipsis"><span>{user.name}</span></td>
+                        <td className="ellipsis"><span>{user.email}</span></td>
                         <td>
                             <button className="btn btn-warning"
                                 onClick={() => this.load(user)}>
                                 <i className="fa fa-pencil"></i>
                             </button>
-                            <button className="btn btn-danger ml-2">
+                            <button className="btn btn-danger ml-2"
+                                onClick={() => this.remove(user)}>
                                 <i className="fa fa-trash"></i>
                             </button>
                         </td>
